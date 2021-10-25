@@ -86,8 +86,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         ................................................................................
         `, SpriteKind.Projectile)
 })
-let plane: Sprite = null
 let car: Sprite = null
+let plane: Sprite = null
 let acorn: Sprite = null
 let firsttouch = false
 let mySprite: Sprite = null
@@ -296,30 +296,9 @@ let tree = sprites.create(img`
     ................................................................................
     ................................................................................
     `, SpriteKind.Food)
-mySprite = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Player)
 mySprite.ay = 300
-game.onUpdateInterval(500, function () {
-    car = sprites.create(assets.image`Car`, SpriteKind.Projectile)
-    car.setVelocity(-100, 0)
-})
-game.onUpdateInterval(500, function () {
+scroller.scrollBackgroundWithSpeed(-50, 0)
+game.onUpdateInterval(2000, function () {
     plane = sprites.create(img`
         ................................................................................
         ................................................................................
@@ -403,4 +382,8 @@ game.onUpdateInterval(500, function () {
         ................................................................................
         `, SpriteKind.Projectile)
     plane.setVelocity(-52, 0)
+})
+game.onUpdateInterval(1500, function () {
+    car = sprites.create(assets.image`Car`, SpriteKind.Projectile)
+    car.setVelocity(-100, 0)
 })
