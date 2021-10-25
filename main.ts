@@ -1,3 +1,6 @@
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+	
+})
 function tree_spawn () {
     tree = sprites.create(img`
         ................................................................................
@@ -415,3 +418,4 @@ scene.setBackgroundImage(img`
 mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
 scroller.scrollBackgroundWithSpeed(-50, 0)
 info.setLife(3)
+tiles.setTilemap(tilemap`level2`)
