@@ -1,3 +1,12 @@
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (true) {
+    	
+    }
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    firsttouch = true
+    mySprite.vy = -150
+})
 function tree_spawn () {
     tree = sprites.create(img`
         ................................................................................
@@ -85,16 +94,6 @@ function tree_spawn () {
     tree.setPosition(randint(160, 200), 40)
     tree.setFlag(SpriteFlag.AutoDestroy, true)
 }
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    firsttouch = true
-    mySprite.vy = -150
-})
-function car_spawn () {
-    car = sprites.create(assets.image`Car`, SpriteKind.Enemy)
-    car.setVelocity(-100, 0)
-    car.setPosition(randint(160, 200), 60)
-    car.setFlag(SpriteFlag.AutoDestroy, true)
-}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     acorn = sprites.create(img`
         ................................................................................
@@ -178,6 +177,15 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         ................................................................................
         ................................................................................
         `, SpriteKind.Projectile)
+})
+function car_spawn () {
+    car = sprites.create(assets.image`Car`, SpriteKind.Enemy)
+    car.setVelocity(-100, 0)
+    car.setPosition(randint(160, 200), 60)
+    car.setFlag(SpriteFlag.AutoDestroy, true)
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    info.setLife(-1)
 })
 function plane_spawn () {
     plane = sprites.create(img`
@@ -266,14 +274,11 @@ function plane_spawn () {
     plane.setPosition(randint(160, 200), 40)
     plane.setFlag(SpriteFlag.AutoDestroy, true)
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    info.setLife(-1)
-})
 let plane: Sprite = null
-let acorn: Sprite = null
 let car: Sprite = null
-let firsttouch = false
+let acorn: Sprite = null
 let tree: Sprite = null
+let firsttouch = false
 let mySprite: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -397,6 +402,8 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
+tiles.setTilemap(tilemap`level1`)
+tiles.placeOnTile(mySprite, tiles.getTileLocation(7, 8))
 mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
 scroller.scrollBackgroundWithSpeed(-50, 0)
 let spawn_check = randint(0, 12)
