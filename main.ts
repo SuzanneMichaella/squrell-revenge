@@ -396,6 +396,4 @@ scene.setBackgroundImage(img`
     `)
 mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
 scroller.scrollBackgroundWithSpeed(-50, 0)
-game.onUpdateInterval(500, function () {
-	
-})
+let spawn_check = randint(0, 12)
