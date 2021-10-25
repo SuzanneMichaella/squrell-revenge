@@ -381,8 +381,12 @@ game.onUpdateInterval(2000, function () {
         ................................................................................
         `, SpriteKind.Enemy)
     plane.setVelocity(-52, 0)
+    plane.setPosition(-160, 40)
+    plane.setFlag(SpriteFlag.AutoDestroy, true)
 })
 game.onUpdateInterval(1500, function () {
     car = sprites.create(assets.image`Car`, SpriteKind.Enemy)
     car.setVelocity(-100, 0)
+    car.setPosition(160, 60)
+    car.setFlag(SpriteFlag.AutoDestroy, true)
 })
