@@ -266,6 +266,9 @@ function plane_spawn () {
     plane.setPosition(randint(160, 200), 40)
     plane.setFlag(SpriteFlag.AutoDestroy, true)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    info.setLife(-1)
+})
 let plane: Sprite = null
 let acorn: Sprite = null
 let car: Sprite = null
@@ -397,3 +400,4 @@ scene.setBackgroundImage(img`
 mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
 scroller.scrollBackgroundWithSpeed(-50, 0)
 let spawn_check = randint(0, 12)
+info.setLife(3)
