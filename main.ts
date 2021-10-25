@@ -95,6 +95,9 @@ function car_spawn () {
     car.setPosition(randint(160, 200), 60)
     car.setFlag(SpriteFlag.AutoDestroy, true)
 }
+sprites.onDestroyed(SpriteKind.Food, function (sprite) {
+    spawn_check = randint(0, 12)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     acorn = sprites.create(img`
         ................................................................................
@@ -268,9 +271,11 @@ function plane_spawn () {
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     info.setLife(-1)
+    otherSprite.destroy()
 })
 let plane: Sprite = null
 let acorn: Sprite = null
+let spawn_check = 0
 let car: Sprite = null
 let firsttouch = false
 let tree: Sprite = null
@@ -399,5 +404,4 @@ scene.setBackgroundImage(img`
     `)
 mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
 scroller.scrollBackgroundWithSpeed(-50, 0)
-let spawn_check = randint(0, 12)
 info.setLife(3)
