@@ -1,5 +1,7 @@
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-	
+    if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
+        mySprite.vy = -200
+    }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     firsttouch = true
@@ -419,11 +421,12 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
+tiles.setTilemap(tilemap`level2`)
 mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
-tiles.placeOnTile(mySprite, tiles.getTileLocation(29, 79))
+tiles.placeOnTile(mySprite, tiles.getTileLocation(20, 72))
+mySprite.ay = 500
 scroller.scrollBackgroundWithSpeed(-50, 0)
 info.setLife(3)
-tiles.setTilemap(tilemap`level2`)
 car_spawn()
 plane_spawn()
 tree_spawn()
