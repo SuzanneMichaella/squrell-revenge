@@ -420,6 +420,7 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
 mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
+tiles.placeOnTile(mySprite, tiles.getTileLocation(29, 79))
 scroller.scrollBackgroundWithSpeed(-50, 0)
 info.setLife(3)
 tiles.setTilemap(tilemap`level2`)
