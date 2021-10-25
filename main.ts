@@ -296,7 +296,6 @@ let tree = sprites.create(img`
     ................................................................................
     ................................................................................
     `, SpriteKind.Food)
-mySprite.ay = 300
 scroller.scrollBackgroundWithSpeed(-50, 0)
 game.onUpdateInterval(2000, function () {
     plane = sprites.create(img`
@@ -380,10 +379,10 @@ game.onUpdateInterval(2000, function () {
         ................................................................................
         ................................................................................
         ................................................................................
-        `, SpriteKind.Projectile)
+        `, SpriteKind.Enemy)
     plane.setVelocity(-52, 0)
 })
 game.onUpdateInterval(1500, function () {
-    car = sprites.create(assets.image`Car`, SpriteKind.Projectile)
+    car = sprites.create(assets.image`Car`, SpriteKind.Enemy)
     car.setVelocity(-100, 0)
 })
