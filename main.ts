@@ -1,6 +1,6 @@
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mySprite.vy == 0) {
-        mySprite.vy = -300
+    if (mySprite.top > 0) {
+        mySprite.vy = -200
         mySprite.ay = gravity
     }
 })
@@ -95,14 +95,9 @@ function tree_spawn () {
     tree.setFlag(SpriteFlag.AutoDestroy, true)
 }
 function squrell_physics () {
-    mySprite.setStayInScreen(true)
+    gravity = 400
     mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
     mySprite.ay = gravity
-    if (mySprite.bottom > 115) {
-        mySprite.bottom = 0
-        mySprite.vy = 0
-        mySprite.ay = 0
-    }
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     acorn = sprites.createProjectileFromSprite(img`
@@ -147,6 +142,15 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         ................................................................................
         ................................................................................
         ................................................................................
+        .......................................cc.......................................
+        ........................................c.......................................
+        ......................................ccccc.....................................
+        .....................................ceeeeec....................................
+        .....................................ccccccc....................................
+        ......................................e444e.....................................
+        ......................................e444e.....................................
+        ......................................e444e.....................................
+        .......................................eee......................................
         ................................................................................
         ................................................................................
         ................................................................................
@@ -195,8 +199,12 @@ function car_spawn () {
     car.setFlag(SpriteFlag.AutoDestroy, true)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    otherSprite.destroy()
     ammo += 1
+    otherSprite.destroy()
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    otherSprite.destroy()
+    info.changeScoreBy(1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy()
@@ -289,14 +297,15 @@ function plane_spawn () {
     plane.setPosition(180, 40)
     plane.setFlag(SpriteFlag.AutoDestroy, true)
 }
+let spawn_check = 0
 let plane: Sprite = null
 let ammo = 0
 let car: Sprite = null
 let acorn: Sprite = null
 let tree: Sprite = null
 let firsttouch = false
-let mySprite: Sprite = null
 let gravity = 0
+let mySprite: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -422,13 +431,19 @@ scene.setBackgroundImage(img`
 scroller.scrollBackgroundWithSpeed(-20, 0)
 info.setLife(3)
 squrell_physics()
-let spawn_check = 0
-gravity = 400
+let acorn_place = 0
+game.onUpdate(function () {
+    if (mySprite.bottom > 115) {
+        mySprite.bottom = 115
+        mySprite.ay = 0
+        mySprite.vy = 0
+    }
+})
 game.onUpdateInterval(2000, function () {
     spawn_check = randint(0, 5)
     if (spawn_check == 1) {
         plane_spawn()
-    } else if (spawn_check > 1) {
+    } else if (spawn_check == 2) {
         car_spawn()
     } else {
     	
