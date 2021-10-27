@@ -442,6 +442,9 @@ game.onUpdate(function () {
     }
 })
 game.onUpdateInterval(2000, function () {
+    tree_spawn()
+})
+game.onUpdateInterval(500, function () {
     spawn_check = randint(0, 5)
     if (spawn_check == 1) {
         plane_spawn()
@@ -450,9 +453,6 @@ game.onUpdateInterval(2000, function () {
     } else {
     	
     }
-})
-game.onUpdateInterval(2000, function () {
-    tree_spawn()
 })
 game.onUpdateInterval(500, function () {
     tree_check = false
