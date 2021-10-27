@@ -283,6 +283,7 @@ function plane_spawn () {
     plane.setPosition(randint(160, 300), 40)
     plane.setFlag(SpriteFlag.AutoDestroy, true)
 }
+let spawn_check = 0
 let plane: Sprite = null
 let ammo = 0
 let car: Sprite = null
@@ -416,7 +417,6 @@ scene.setBackgroundImage(img`
 scroller.scrollBackgroundWithSpeed(-20, 0)
 info.setLife(3)
 squrell_physics()
-let spawn_check = 0
 game.onUpdateInterval(2000, function () {
     tree_spawn()
 })
