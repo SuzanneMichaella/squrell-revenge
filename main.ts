@@ -1,9 +1,6 @@
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.vy = -160
+    mySprite.vy = -200
     mySprite.ay = gravity
-})
-scene.onHitWall(SpriteKind.Player, function (sprite, location) {
-	
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     firsttouch = true
@@ -194,15 +191,12 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 function car_spawn () {
     car = sprites.create(assets.image`Car`, SpriteKind.Enemy)
     car.setVelocity(-100, 0)
-    car.setPosition(randint(160, 300), 60)
+    car.setPosition(randint(160, 300), 100)
     car.setFlag(SpriteFlag.AutoDestroy, true)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     otherSprite.destroy()
     ammo += 1
-})
-sprites.onDestroyed(SpriteKind.Enemy, function (sprite) {
-    plane_spawn_check = randint(0, 12)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     info.setLife(-1)
@@ -296,7 +290,6 @@ function plane_spawn () {
     plane.setFlag(SpriteFlag.AutoDestroy, true)
 }
 let plane: Sprite = null
-let plane_spawn_check = 0
 let ammo = 0
 let car: Sprite = null
 let acorn: Sprite = null
@@ -430,10 +423,9 @@ scene.setBackgroundImage(img`
 scroller.scrollBackgroundWithSpeed(-20, 0)
 info.setLife(3)
 squrell_physics()
-game.onUpdateInterval(5000, function () {
-    car_spawn()
-})
 game.onUpdateInterval(2000, function () {
     tree_spawn()
-    plane_spawn()
+})
+game.onUpdateInterval(1000, function () {
+    car_spawn()
 })
