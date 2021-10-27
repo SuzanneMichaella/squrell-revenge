@@ -1,6 +1,8 @@
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.vy = -200
-    mySprite.ay = gravity
+    if (mySprite.vy == 0) {
+        mySprite.vy = -300
+        mySprite.ay = gravity
+    }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     firsttouch = true
@@ -93,10 +95,14 @@ function tree_spawn () {
     tree.setFlag(SpriteFlag.AutoDestroy, true)
 }
 function squrell_physics () {
-    gravity = 400
-    mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
     mySprite.setStayInScreen(true)
+    mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
     mySprite.ay = gravity
+    if (mySprite.bottom > 115) {
+        mySprite.bottom = 0
+        mySprite.vy = 0
+        mySprite.ay = 0
+    }
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     acorn = sprites.createProjectileFromSprite(img`
@@ -283,15 +289,14 @@ function plane_spawn () {
     plane.setPosition(180, 40)
     plane.setFlag(SpriteFlag.AutoDestroy, true)
 }
-let spawn_check = 0
 let plane: Sprite = null
 let ammo = 0
 let car: Sprite = null
 let acorn: Sprite = null
 let tree: Sprite = null
 let firsttouch = false
-let gravity = 0
 let mySprite: Sprite = null
+let gravity = 0
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -417,11 +422,13 @@ scene.setBackgroundImage(img`
 scroller.scrollBackgroundWithSpeed(-20, 0)
 info.setLife(3)
 squrell_physics()
+let spawn_check = 0
+gravity = 400
 game.onUpdateInterval(2000, function () {
     spawn_check = randint(0, 5)
     if (spawn_check == 1) {
         plane_spawn()
-    } else if (spawn_check == 2) {
+    } else if (spawn_check > 1) {
         car_spawn()
     } else {
     	
