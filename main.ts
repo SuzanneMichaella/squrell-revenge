@@ -199,7 +199,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function car_spawn () {
     car = sprites.create(assets.image`Car`, SpriteKind.Enemy)
-    car.setVelocity(-60, 0)
+    car.setVelocity(-40, 0)
     car.setPosition(180, 100)
     car.setFlag(SpriteFlag.AutoDestroy, true)
 }
@@ -303,8 +303,8 @@ function plane_spawn () {
         ................................................................................
         ................................................................................
         `, SpriteKind.Enemy)
-    plane.setVelocity(-80, 0)
-    plane.setPosition(180, 40)
+    plane.setVelocity(-50, 0)
+    plane.setPosition(180, 20)
     plane.setFlag(SpriteFlag.AutoDestroy, true)
 }
 let plane_spawn_check = 0
@@ -444,7 +444,7 @@ scroller.scrollBackgroundWithSpeed(-20, 0)
 info.setLife(3)
 info.setScore(0)
 squrell_physics()
-let difficulty = info.score() / 5
+let difficulty = info.score() / 3
 game.onUpdate(function () {
     if (mySprite.bottom > 115) {
         mySprite.bottom = 115
