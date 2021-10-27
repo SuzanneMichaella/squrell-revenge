@@ -106,8 +106,6 @@ function squrell_physics () {
     mySprite = sprites.create(assets.image`Squirrel`, SpriteKind.Player)
     mySprite.setStayInScreen(true)
     mySprite.ay = gravity
-    tiles.setWallAt(tiles.getTileLocation(0, 6), true)
-    tiles.setWallAt(tiles.getTileLocation(0, 90), true)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     acorn = sprites.createProjectileFromSprite(img`
@@ -432,7 +430,6 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
-tiles.setTilemap(tilemap`level2`)
 scroller.scrollBackgroundWithSpeed(-20, 0)
 info.setLife(3)
 squrell_physics()
