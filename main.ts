@@ -5,7 +5,7 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    firsttouch = true
+    tree_check = true
 })
 function tree_spawn () {
     tree = sprites.create(img`
@@ -199,8 +199,10 @@ function car_spawn () {
     car.setFlag(SpriteFlag.AutoDestroy, true)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    ammo += 1
-    otherSprite.destroy()
+    if (tree_check == true) {
+        ammo += 1
+        otherSprite.destroy()
+    }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy()
@@ -303,7 +305,7 @@ let ammo = 0
 let car: Sprite = null
 let acorn: Sprite = null
 let tree: Sprite = null
-let firsttouch = false
+let tree_check = false
 let gravity = 0
 let mySprite: Sprite = null
 scene.setBackgroundImage(img`
@@ -430,6 +432,7 @@ scene.setBackgroundImage(img`
     `)
 scroller.scrollBackgroundWithSpeed(-20, 0)
 info.setLife(3)
+info.setScore(0)
 squrell_physics()
 game.onUpdate(function () {
     if (mySprite.bottom > 115) {
@@ -450,4 +453,7 @@ game.onUpdateInterval(2000, function () {
 })
 game.onUpdateInterval(2000, function () {
     tree_spawn()
+})
+game.onUpdateInterval(500, function () {
+    tree_check = false
 })
