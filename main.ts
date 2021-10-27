@@ -98,7 +98,7 @@ function tree_spawn () {
         ................................................................................
         `, SpriteKind.Food)
     tree.setVelocity(-52, 0)
-    tree.setPosition(randint(160, 200), 40)
+    tree.setPosition(randint(160, 300), 40)
     tree.setFlag(SpriteFlag.AutoDestroy, true)
 }
 function squrell_physics () {
@@ -194,7 +194,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 function car_spawn () {
     car = sprites.create(assets.image`Car`, SpriteKind.Enemy)
     car.setVelocity(-100, 0)
-    car.setPosition(randint(160, 200), 60)
+    car.setPosition(randint(160, 300), 60)
     car.setFlag(SpriteFlag.AutoDestroy, true)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
@@ -203,9 +203,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 })
 sprites.onDestroyed(SpriteKind.Enemy, function (sprite) {
     plane_spawn_check = randint(0, 12)
-    if (plane_spawn_check == 12) {
-        plane_spawn()
-    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     info.setLife(-1)
@@ -295,7 +292,7 @@ function plane_spawn () {
         ................................................................................
         `, SpriteKind.Enemy)
     plane.setVelocity(-20, 0)
-    plane.setPosition(randint(160, 200), 40)
+    plane.setPosition(randint(160, 300), 40)
     plane.setFlag(SpriteFlag.AutoDestroy, true)
 }
 let plane: Sprite = null
@@ -433,6 +430,10 @@ scene.setBackgroundImage(img`
 scroller.scrollBackgroundWithSpeed(-20, 0)
 info.setLife(3)
 squrell_physics()
-car_spawn()
-plane_spawn()
-tree_spawn()
+game.onUpdateInterval(5000, function () {
+    car_spawn()
+})
+game.onUpdateInterval(2000, function () {
+    tree_spawn()
+    plane_spawn()
+})
