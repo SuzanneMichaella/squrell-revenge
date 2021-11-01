@@ -444,7 +444,6 @@ scroller.scrollBackgroundWithSpeed(-20, 0)
 info.setLife(3)
 info.setScore(0)
 squrell_physics()
-let difficulty = info.score() / 3
 game.onUpdate(function () {
     if (mySprite.bottom > 115) {
         mySprite.bottom = 115
@@ -453,7 +452,7 @@ game.onUpdate(function () {
     }
 })
 game.onUpdateInterval(2000, function () {
-    tree_spawn_check = randint(0, 5)
+    tree_spawn_check = randint(0, 3)
     if (tree_spawn_check > 1) {
         tree_spawn()
     }
@@ -462,8 +461,8 @@ game.onUpdateInterval(500, function () {
     tree_check = false
 })
 game.onUpdateInterval(3000, function () {
-    car_spawn_check = randint(1, 3)
-    if (car_spawn_check == 2 && difficulty > 0) {
+    car_spawn_check = randint(1, 4)
+    if (car_spawn_check == 2 && true) {
         car_spawn()
     }
 })
